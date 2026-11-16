@@ -1,11 +1,18 @@
-"""Заготовка API для этапа Red."""
+from fastapi import FastAPI
+from pydantic import BaseModel, ConfigDict, Field
 
-from fastapi import FastAPI, HTTPException
+app = FastAPI(title="Подсчёт слов")
 
-app = FastAPI()
+
+class TextRequest(BaseModel):
+    """Текст, в котором нужно посчитать слова."""
+
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    text: str = Field(min_length=1)
 
 
 @app.post("/words/count")
-def count_words() -> dict[str, int]:
-    """Обозначает маршрут до реализации."""
-    raise HTTPException(status_code=501, detail="Пока не реализовано")
+def count_words(data: TextRequest) -> dict[str, int]:
+    """Считает части текста, разделённые пробельными символами."""
+    return {"count": len(data.text.split())}
