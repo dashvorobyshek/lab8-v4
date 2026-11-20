@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lab8-textutils-dvorobyeva-221341"
+version = "0.1.0"
+description = "Text utility for Python laboratory work"
+readme = {text = "A function for normalizing spaces in text.", content-type = "text/markdown"}
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["src"]
